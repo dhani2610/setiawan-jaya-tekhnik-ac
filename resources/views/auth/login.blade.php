@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Administrator - Jasa Service AC</title>
-    <link rel="icon" type="image/png" href="{{ asset('assets/images/hero_illustration.jpg') }}">
+    <title>Login Administrator - SETIAWAN JAYA TEKHNIK AC</title>
+    <link rel="icon" type="image/png" href="{{ asset('storage/settings/favicon.jpg') }}">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,10 +29,11 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            position: relative;
         }
 
         .login-card {
-            background: rgba(255, 255, 255, 0.90);
+            background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.8);
             border-radius: 20px;
@@ -40,6 +41,7 @@
             width: 100%;
             max-width: 440px;
             padding: 40px 32px;
+            position: relative;
         }
 
         .btn-primary {
@@ -51,11 +53,18 @@
             transition: all 0.2s;
         }
 
-        .btn-primary:hover {
+        .btn-primary:hover:not(:disabled) {
             background: #0369A1;
             border-color: #0369A1;
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+        }
+
+        .btn-primary:disabled {
+            background: #0284C7;
+            border-color: #0284C7;
+            opacity: 0.85;
+            cursor: not-allowed;
         }
 
         .form-control {
@@ -68,15 +77,64 @@
             border-color: #0284C7;
             box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
         }
+
+        /* Loading Overlay */
+        #loginOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.55);
+            backdrop-filter: blur(6px);
+            z-index: 99999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.25s ease-in-out;
+        }
+
+        #loginOverlay.active {
+            display: flex !important;
+            opacity: 1;
+        }
+
+        .loader-box {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 28px 32px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 320px;
+            width: 90%;
+            animation: pulseCard 1.8s infinite ease-in-out;
+        }
+
+        @keyframes pulseCard {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
     </style>
 </head>
 <body>
+
+    <!-- Fullscreen Modern Loader Overlay -->
+    <div id="loginOverlay">
+        <div class="loader-box">
+            <div class="spinner-border text-primary mb-3" style="width: 3.2rem; height: 3.2rem; border-width: 0.28em;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <h6 class="fw-bold text-dark mb-1">Memproses Masuk...</h6>
+            <p class="text-muted small mb-0">Sedang memverifikasi akun dan menyiapkan dashboard Anda</p>
+        </div>
+    </div>
 
     <div class="login-card">
         <div class="text-center mb-4">
             <img src="{{ asset('storage/settings/logo.jpg') }}" alt="Logo" class="rounded-circle shadow-sm mb-3" style="width: 72px; height: 72px; object-fit: cover; border: 2px solid #38BDF8;">
             <h4 class="fw-bold text-dark mb-1">Administrator</h4>
-            <p class="text-muted small mb-0">Silakan login untuk mengelola website Service AC</p>
+            <p class="text-muted small mb-0">SETIAWAN JAYA TEKHNIK AC</p>
         </div>
 
         <form action="{{ route('login') }}" method="POST" id="loginForm">
@@ -119,13 +177,14 @@
                 </a>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100 mb-3 d-flex align-items-center justify-content-center gap-2">
-                <i class="fa-solid fa-right-to-bracket"></i> Masuk Sekarang
+            <button type="submit" class="btn btn-primary w-100 mb-3 d-flex align-items-center justify-content-center gap-2" id="btnLogin">
+                <i class="fa-solid fa-right-to-bracket" id="btnLoginIcon"></i>
+                <span id="btnLoginText">Masuk Sekarang</span>
             </button>
         </form>
 
         <div class="text-center text-muted small mt-4 pt-3 border-top">
-            <span class="text-secondary">&copy; {{ date('Y') }} Jasa Service AC Duren Sawit</span>
+            <span class="text-secondary">&copy; {{ date('Y') }} SETIAWAN JAYA TEKHNIK AC</span>
         </div>
     </div>
 
@@ -133,12 +192,28 @@
         const togglePassword = document.getElementById('togglePassword');
         const passwordInput = document.getElementById('password');
         const eyeIcon = document.getElementById('eyeIcon');
+        const loginForm = document.getElementById('loginForm');
+        const btnLogin = document.getElementById('btnLogin');
+        const btnLoginIcon = document.getElementById('btnLoginIcon');
+        const btnLoginText = document.getElementById('btnLoginText');
+        const loginOverlay = document.getElementById('loginOverlay');
 
         togglePassword.addEventListener('click', function() {
             const isPassword = passwordInput.getAttribute('type') === 'password';
             passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
             eyeIcon.classList.toggle('fa-eye');
             eyeIcon.classList.toggle('fa-eye-slash');
+        });
+
+        // Form Submit Loading Feedback
+        loginForm.addEventListener('submit', function() {
+            // Disable button and show spinner inside button
+            btnLogin.disabled = true;
+            btnLoginIcon.className = 'spinner-border spinner-border-sm';
+            btnLoginText.textContent = 'Memproses Masuk...';
+
+            // Show full modern overlay
+            loginOverlay.classList.add('active');
         });
 
         @if(session('success'))

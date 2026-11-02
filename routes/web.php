@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,4 +90,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // Pengaturan Website
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::put('/settings', [SettingController::class, 'update'])->name('settings.update');
+
+    // Profil & Keamanan Admin
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::put('/profile/info', [ProfileController::class, 'updateProfile'])->name('profile.update_info');
+    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.update_password');
 });

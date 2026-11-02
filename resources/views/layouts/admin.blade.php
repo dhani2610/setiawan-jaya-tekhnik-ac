@@ -349,6 +349,12 @@
                 </a>
             </li>
             <li class="sidebar-item">
+                <a href="{{ route('admin.profile.index') }}" class="sidebar-link {{ request()->routeIs('admin.profile.*') ? 'active' : '' }}">
+                    <i class="fa-solid fa-user-gear"></i>
+                    <span class="sidebar-text">Profil Admin</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
                 <a href="{{ route('admin.settings.index') }}" class="sidebar-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
                     <i class="fa-solid fa-gear"></i>
                     <span class="sidebar-text">Pengaturan</span>
@@ -395,6 +401,7 @@
                         <i class="fa-solid fa-chevron-down text-muted" style="font-size: 11px;"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 mt-2">
+                        <li><a class="dropdown-item py-2" href="{{ route('admin.profile.index') }}"><i class="fa-solid fa-user-pen me-2 text-primary"></i>Edit Profil & Password</a></li>
                         <li><a class="dropdown-item py-2" href="{{ route('admin.settings.index') }}"><i class="fa-solid fa-gear me-2 text-muted"></i>Pengaturan</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item py-2 text-danger" href="javascript:void(0)" onclick="confirmLogout()"><i class="fa-solid fa-right-from-bracket me-2"></i>Keluar</a></li>

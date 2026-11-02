@@ -20,6 +20,7 @@
 /public/storage
 /cloudflared.exe
 /chrome_temp
+*.py
 *.png
 *.jpg
 !storage/app/public/**

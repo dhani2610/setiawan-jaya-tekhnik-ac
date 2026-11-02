@@ -144,7 +144,7 @@
                 <label for="email" class="form-label fw-semibold small text-muted">Email</label>
                 <div class="input-group">
                     <span class="input-group-text bg-light border-end-0 text-muted"><i class="fa-solid fa-envelope"></i></span>
-                    <input type="email" class="form-control border-start-0 ps-0 @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email', 'admin@serviceac.com') }}" required autofocus placeholder="nama@email.com">
+                    <input type="email" class="form-control border-start-0 ps-0 @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autofocus placeholder="nama@email.com">
                 </div>
                 @error('email')
                     <div class="text-danger small mt-1">{{ $message }}</div>
@@ -155,7 +155,7 @@
                 <label for="password" class="form-label fw-semibold small text-muted">Password</label>
                 <div class="input-group">
                     <span class="input-group-text bg-light border-end-0 text-muted"><i class="fa-solid fa-lock"></i></span>
-                    <input type="password" class="form-control border-start-0 border-end-0 ps-0 @error('password') is-invalid @enderror" id="password" name="password" value="admin123" required placeholder="Masukkan password">
+                    <input type="password" class="form-control border-start-0 border-end-0 ps-0 @error('password') is-invalid @enderror" id="password" name="password" value="" required placeholder="Masukkan password">
                     <button class="input-group-text bg-light border-start-0 text-muted" type="button" id="togglePassword">
                         <i class="fa-solid fa-eye" id="eyeIcon"></i>
                     </button>
@@ -167,7 +167,7 @@
 
             <div class="d-flex align-items-center justify-content-between mb-4">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="remember" id="remember" checked>
+                    <input class="form-check-input" type="checkbox" name="remember" id="remember">
                     <label class="form-check-label small text-muted" for="remember">
                         Ingat Saya
                     </label>

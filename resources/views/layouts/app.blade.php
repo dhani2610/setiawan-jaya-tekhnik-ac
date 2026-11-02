@@ -6,6 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
+    <meta name="google-site-verification" content="NIVqdyR26CdQJ1AABeAOAKIbGL3LBzPYq_NbRFKQFm8" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GBGNGWBDHP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GBGNGWBDHP');
+    </script>
+    
     <title>@yield('meta_title', ($setting->site_name ?? 'Jasa Service AC') . ' - Spesialis Cuci & Service AC Garansi 2 Bulan Jakarta Timur')</title>
     
     <!-- Meta SEO & Search Engines -->

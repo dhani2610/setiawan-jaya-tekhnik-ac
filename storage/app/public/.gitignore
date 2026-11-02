@@ -1,0 +1,16 @@
+*
+!.gitignore
+!sliders/
+!sliders/**
+!services/
+!services/**
+!promos/
+!promos/**
+!articles/
+!articles/**
+!settings/
+!settings/**
+!company/
+!company/**
+!testimonials/
+!testimonials/**
